@@ -17,15 +17,37 @@ class Login extends React.Component {
 		super(props)
 		this.state = {
 			username: '',
-			password: ''
+			password: '',
+
 		}
 	}
-	componentDidMount() {
-		
+	_onPressButton() {
+		// navigate pushes to home screen
+		const { navigate } = this.props.navigation;
+		url = 'https://floating-shore-34169.herokuapp.com/login';
+		fetch(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				username: this.state.username,
+				password: this.state.password
+			})
+		})
+		.then( res => res.json() )
+		.then( data => {
+			if(data){
+			  // navigate pushes to home screen
+			  navigate('Home', {user: this.state.username})
+			}
+		})
+		.catch( (err) => {
+			console.log(err)
+		})		
 	}
 	render() {
-		const { navigate } = this.props.navigation;
-		const name = 'Dude';
+		//const { navigate } = this.props.navigation;
 		return (
 			<View style={styles.containerView} >
 				<TextInput 
@@ -42,8 +64,8 @@ class Login extends React.Component {
                   value={this.state.password}
 				/>
 				<Button 
-					onPress={ () => navigate('Home', {user: this.state.username} ) }
-					title="submit"
+				  onPress={this._onPressButton.bind(this)}
+				  title="submit"
 				/>
 			</View>
 			)
@@ -69,31 +91,11 @@ const styles = StyleSheet.create({
 export default Login
 
 
-	// render() {
-	// 	return (
-	// 		<View>
-	// 			<Text style={{marginTop: 40}}>neuroflow</Text>
-	// 			<Text >Changing the way we see brain health</Text>
-	// 			<Text >Welcome {this.props.username}</Text>
-	// 			<Text >{this.state.redditor}</Text>
-	// 			<Text >Device Icon Device Icon</Text>
-	// 			<Text >Select which available device to stream (up to 3)</Text>
-	// 			<Text>Device</Text>
-	// 			<Text>Device</Text>
-	// 			<DeviceButton onPress={this._onPressButton.bind(this)} />
-	// 			{/* <DeviceButton /> */}
-	// 			<Text>Device</Text>
-	// 			<TextInput style={{height: 40, borderColor: 'black', borderWidth: 1, margin: 10, marginTop: 30}}
-	// 			  onChangeText={(text) => this.setState({text})}
- //                  value={this.state.text}
-	// 			/>
-	// 			<Text style={styles.output}>{this.state.text}</Text>
-	// 		</View>
-	// 	);
-	// }
+/*
 
 
-					  /*
-				  onChangeText={(text) => this.setState({text})} 
-                  value={this.state.text}
-                  */
+onPress={ () => navigate('Home', {user: this.state.username} ) }
+
+
+
+*/
