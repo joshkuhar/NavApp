@@ -4,7 +4,7 @@ import {
 	View,
 	Button
 } from 'react-native';
-import Interface from './containers/interface'
+import Device from './containers/device'
 import { StackNavigator } from 'react-navigation';
 
 class HomePage extends React.Component {
@@ -16,7 +16,7 @@ class HomePage extends React.Component {
 		return (
 			<View>
 				<Text>Welcome, {params.user} </Text>
-				<Interface username={params.user} />
+				<Device />
 			</View>
 			);
 	}

@@ -16,7 +16,7 @@ class Login extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			username: '',
+			username: 'foo',
 			password: '',
 
 		}
@@ -24,27 +24,28 @@ class Login extends React.Component {
 	_onPressButton() {
 		// navigate pushes to home screen
 		const { navigate } = this.props.navigation;
-		url = 'https://floating-shore-34169.herokuapp.com/login';
-		fetch(url, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				username: this.state.username,
-				password: this.state.password
-			})
-		})
-		.then( res => res.json() )
-		.then( data => {
-			if(data){
-			  // navigate pushes to home screen
-			  navigate('Home', {user: this.state.username})
-			}
-		})
-		.catch( (err) => {
-			console.log(err)
-		})		
+		navigate('Home', {user: this.state.username})
+		// url = 'https://floating-shore-34169.herokuapp.com/login';
+		// fetch(url, {
+		// 	method: 'POST',
+		// 	headers: {
+		// 		'Content-Type': 'application/json'
+		// 	},
+		// 	body: JSON.stringify({
+		// 		username: this.state.username,
+		// 		password: this.state.password
+		// 	})
+		// })
+		// .then( res => res.json() )
+		// .then( data => {
+		// 	if(data){
+		// 	  // navigate pushes to home screen
+		// 	  navigate('Home', {user: this.state.username})
+		// 	}
+		// })
+		// .catch( (err) => {
+		// 	console.log(err)
+		// })		
 	}
 	render() {
 		//const { navigate } = this.props.navigation;
